@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stats</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style3.css">
+    
+</head>
+<body>
+    <header class="header">
+  <div class="logo">
+    <div class="logo-box"></div> 
+    <div>FocusFlow</div>
+</div>
+  <nav class="nav" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="timer.html">Timer</a>
+    <a href="stats.html">Stats</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <div class="right">
+    <a href="login.html" class="login">Login</a>
+    <button class="signup"
+    onclick="window.location.href='signup.html'">
+    Sign up
+</button>
+  </div>
+
+  <div class="actions">
+    <button id="themeToggle">🌙</button>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </div>
+</header>
+<main class="container">
+  <div class="stats-top">
+
+  <!-- Chart -->
+  <div class="chart-box">
+    <h3>Weekly Activity</h3>
+    <div class="chart">
+      <div class="bar" style="height: 40%">Mon</div>
+      <div class="bar" style="height: 60%">Tue</div>
+      <div class="bar" style="height: 30%">Wed</div>
+      <div class="bar" style="height: 80%">Thu</div>
+      <div class="bar" style="height: 50%">Fri</div>
+      <div class="bar" style="height: 20%">Sat</div>
+      <div class="bar" style="height: 10%">Sun</div>
+    </div>
+  </div>
+
+  <!-- Insights -->
+  <div class="insights-box">
+    <h3>Insights</h3>
+    <p>🔥 Best Day: Thursday</p>
+    <p>📈 Productivity: High</p>
+    <p>⏳ Avg Focus: 2 hrs/day</p>
+    <p>🎯 Keep it up!</p>
+  </div>
+
+</div>
+  <div class="card">
+    <h3>Total Tasks</h3>
+    <p id="totalTasks">0</p>
+  </div>
+
+  <div class="card">
+    <h3>Completed</h3>
+    <p id="doneTasks">0</p>
+  </div>
+
+  <div class="card">
+    <h3>Pending</h3>
+    <p id="pendingTasks">0</p>
+  </div>
+
+  <div class="card">
+    <h3>Focus Sessions</h3>
+    <p id="focusSessions">0</p>
+  </div>
+
+</div>
+
+<!-- Progress Section -->
+<div class="progress-section">
+  <h3>Progress</h3>
+  <div class="progress-bar">
+    <div id="progressFill"></div>
+  </div>
+  <p id="progressText">0%</p>
+</div>
+
+<!-- Daily Summary -->
+<div class="summary">
+  <h3>Today's Summary</h3>
+  <p>💡 Stay consistent and finish your goals!</p>
+</div>
+</main>
+<script src="script3.js"></script>
+<script src="stats.js"></script>
+
+</body>
+</html>

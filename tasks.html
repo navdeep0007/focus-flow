@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tasks</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <header class="header">
+  <div class="logo">
+    <div class="logo-box"></div> 
+    <div>FocusFlow</div>
+</div>
+
+  <nav class="nav" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="timer.html">Timer</a>
+    <a href="stats.html">Stats</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <div class="right">
+    <a href="login.html" class="login">Login</a>
+    <button class="signup"
+    onclick="window.location.href='signup.html'">
+    Sign up
+</button>
+  </div>
+
+  <div class="actions">
+    <button id="themeToggle">🌙</button>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </div>
+</header>
+<main class="container">
+
+  <section class="card">
+    <h2>Tasks</h2>
+
+    
+<!-- Task input section -->
+    <div class="task-input">
+  <input id="taskInput" placeholder="Enter task...">
+
+  <select id="category">
+    <option>Work</option>
+    <option>Personal</option>
+    <option>Study</option>
+  </select>
+
+  <input type="date" id="dueDate">
+
+  <button onclick="addTask()">Add</button>
+</div>
+
+<!-- Filters -->
+<div class="filters">
+  <button onclick="filterTasks('all')">All</button>
+  <button onclick="filterTasks('done')">Completed</button>
+  <button onclick="filterTasks('pending')">Pending</button>
+</div>
+
+    <!-- Progress -->
+    <div class="progress">
+      <p id="progressText">0% Completed</p>
+      <div class="progress-bar">
+        <div id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- Task List -->
+    <ul id="taskList"></ul>
+
+    <!-- Empty Message -->
+    <p id="emptyMsg">No tasks yet 🚀</p>
+
+  </section>
+
+</main>
+<section class="extra">
+
+  <div class="extra-card">
+    <h3>📊 Today’s Summary</h3>
+    <p>Total Tasks: <span id="totalTasks">0</span></p>
+    <p>Completed: <span id="doneTasks">0</span></p>
+    <p>Pending: <span id="pendingTasks">0</span></p>
+  </div>
+
+  <div class="extra-card">
+    <h3>⚡ Productivity Tip</h3>
+    <p id="tipText">Stay focused and complete one task at a time.</p>
+  </div>
+
+</section>
+<script src="script3.js"></script>
+</body>
+</html>

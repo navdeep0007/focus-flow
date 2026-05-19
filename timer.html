@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timer</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <header class="header">
+  <div class="logo">
+    <div class="logo-box"></div> 
+    <div>FocusFlow</div>
+</div>
+  
+
+  <nav class="nav" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="timer.html">Timer</a>
+    <a href="stats.html">Stats</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <div class="right">
+    <a href="login.html" class="login">Login</a>
+    <button class="signup"
+onclick="window.location.href='signup.html'">
+  Sign up
+</button>
+  </div>
+
+  <div class="actions">
+    <button id="themeToggle">🌙</button>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </div>
+</header>
+<section class="timer-container">
+
+  
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Timer</title>
+
+  <link rel="stylesheet" href="style3.css">
+</head>
+
+<body>
+
+<section class="timer-section">
+
+  <h1>Pomodoro Timer</h1>
+
+  <!-- Mode -->
+  <div class="modes">
+    <button onclick="setMode(25)">Focus</button>
+    <button onclick="setMode(5)">Break</button>
+  </div>
+
+  <!-- Manual Time Input -->
+  <div class="manual-time">
+    <input type="number"
+           id="minutesInput"
+           placeholder="Enter Minutes"
+           value="25"
+           min="1">
+  </div>
+
+  <!-- Timer Display -->
+  <div class="timer-circle">
+    <span id="time">25:00</span>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+
+    <button onclick="startTimer()">
+      Start
+    </button>
+
+    <button onclick="stopTimer()">
+      Stop
+    </button>
+
+    <button onclick="resetTimer()">
+      Reset
+    </button>
+
+  </div>
+
+  <!-- Session Count -->
+  <p>
+    Sessions Completed:
+    <span id="sessions">0</span>
+  </p>
+
+  <!-- Motivation -->
+  <p class="quote" id="quoteText">
+    Stay focused 💪
+  </p>
+
+  <!-- Break History -->
+  <div class="break-history">
+
+    <h3>Break History</h3>
+
+    <ul id="breakList"></ul>
+
+  </div>
+
+</section>
+
+<script src="script3.js"></script>
+
+</body>
+</html>

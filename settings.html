@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>settings</title>
+    <link rel="stylesheet" href="style3.css">
+
+</head>
+<body>
+    <header class="header">
+  <div class="logo">
+    <div class="logo-box"></div> 
+    <div>FocusFlow</div>
+</div>
+  <nav class="nav" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="timer.html">Timer</a>
+    <a href="stats.html">Stats</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <div class="right">
+    <a href="login.html" class="login">Login</a>
+    <button class="signup"
+onclick="window.location.href='signup.html'">
+  Sign up
+</button>
+  </div>
+
+  <div class="actions">
+    <button id="themeToggle">🌙</button>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </div>
+</header>
+<main class="container">
+  <div class="settings-grid">
+
+  <!-- Theme -->
+  <div class="settings-card">
+    <h3>🎨 Theme</h3>
+    <button onclick="setTheme('light')">Light</button>
+    <button onclick="setTheme('dark')">Dark</button>
+  </div>
+
+  <!-- Timer Settings -->
+  <div class="settings-card">
+    <h3>⏰ Timer Duration</h3>
+    <input type="number" id="timerInput" placeholder="25" />
+    <button onclick="saveTimer()">Save</button>
+  </div>
+
+  <!-- Notifications -->
+  <div class="settings-card">
+    <h3>🔔 Notifications</h3>
+    <label>
+      <input type="checkbox" id="notifyToggle" />
+      Enable alerts
+    </label>
+  </div>
+
+  <!-- Profile -->
+  <div class="settings-card">
+    <h3>👤 Profile</h3>
+    <input type="text" id="username" placeholder="Enter your name" />
+    <button onclick="saveName()">Save</button>
+  </div>
+
+  <!-- Data -->
+  <div class="settings-card">
+    <h3>💾 Data</h3>
+    <button onclick="exportData()">Export Data</button>
+    <button onclick="clearData()">Reset All</button>
+  </div>
+
+</div>
+</main>
+<script src="script3.js"></script>
+<script src="settings.js"></script>
+</body>
+</html>
