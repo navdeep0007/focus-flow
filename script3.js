@@ -1,36 +1,136 @@
 
-// ===== TASK SYSTEM =====
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-function saveTasks() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+
+
+
+
+// =========================================
+// TASK SYSTEM
+// =========================================
+
+let tasks =
+  JSON.parse(localStorage.getItem("tasks")) || [];
+
+function saveTasks(){
+
+  localStorage.setItem(
+    "tasks",
+    JSON.stringify(tasks)
+  );
 }
 
-function addTask() {
-  const input = document.getElementById("taskInput");
-  if (!input || input.value.trim() === "") return;
+function addTask(){
 
-  tasks.push({ text: input.value, done: false });
+  const input =
+    document.getElementById("taskInput");
+
+  const category =
+    document.getElementById("category");
+
+  const dueDate =
+    document.getElementById("dueDate");
+
+  const priority =
+    document.getElementById("priority");
+
+  if(input.value.trim() === "") return;
+
+  tasks.push({
+
+    text: input.value,
+
+    category: category.value,
+
+    dueDate: dueDate.value,
+
+    priority: priority.value,
+
+    done:false
+  });
+
   input.value = "";
 
   saveTasks();
+
   renderTasks();
+
+  showNotification(
+  "Task Added Successfully ✅"
+);
 }
 
-function renderTasks() {
-  const list = document.getElementById("taskList");
-  if (!list) return;
+function renderTasks(filtered = tasks){
+
+  const list =
+    document.getElementById("taskList");
+
+  const empty =
+    document.getElementById("emptyMsg");
+
+  if(!list) return;
 
   list.innerHTML = "";
 
-  tasks.forEach((task, i) => {
-    const li = document.createElement("li");
+  if(filtered.length === 0){
+
+    empty.style.display = "block";
+
+  } else {
+
+    empty.style.display = "none";
+  }
+
+  filtered.forEach((task,index)=>{
+
+    const li =
+      document.createElement("li");
+
+    li.className = "task-item";
 
     li.innerHTML = `
-      <span onclick="toggleTask(${i})">
-        ${task.done ? "✔️" : "❌"} ${task.text}
-      </span>
-      <button onclick="deleteTask(${i})">X</button>
+
+      <div class="task-left">
+
+        <div class="task-name">
+
+          ${task.done ? "✅" : "📌"}
+
+          ${task.text}
+
+        </div>
+
+        <div class="task-meta">
+
+          📂 ${task.category}
+          &nbsp;&nbsp;
+          📅 ${task.dueDate}
+
+        </div>
+
+        <div class="priority ${task.priority.toLowerCase()}">
+
+          ${task.priority}
+
+        </div>
+
+      </div>
+
+      <div>
+
+        <button onclick="toggleTask(${index})">
+
+          ${task.done ? "Undo" : "Done"}
+
+        </button>
+
+        <button onclick="deleteTask(${index})">
+
+          Delete
+
+        </button>
+
+      </div>
     `;
 
     list.appendChild(li);
@@ -39,29 +139,190 @@ function renderTasks() {
   updateStats();
 }
 
-function toggleTask(i) {
-  tasks[i].done = !tasks[i].done;
+function toggleTask(index){
+
+  tasks[index].done =
+    !tasks[index].done;
+
   saveTasks();
+
   renderTasks();
 }
 
-function deleteTask(i) {
-  tasks.splice(i, 1);
+function deleteTask(index){
+
+  tasks.splice(index,1);
+
   saveTasks();
+
   renderTasks();
 }
 
-// ===== STATS =====
-function updateStats() {
+// =========================================
+// FILTER TASKS
+// =========================================
+
+function filterTasks(type){
+
+  const list =
+    document.getElementById("taskList");
+
+  list.innerHTML = "";
+
+  let filteredTasks = [];
+
+  // ALL TASKS
+  if(type === "all"){
+
+    filteredTasks = tasks;
+  }
+
+  // COMPLETED TASKS
+  else if(type === "done"){
+
+    filteredTasks =
+      tasks.filter(task => task.done);
+  }
+
+  // PENDING TASKS
+  else if(type === "pending"){
+
+    filteredTasks =
+      tasks.filter(task => !task.done);
+  }
+
+  // SHOW EMPTY MESSAGE
+  const empty =
+    document.getElementById("emptyMsg");
+
+  if(filteredTasks.length === 0){
+
+    empty.style.display = "block";
+
+  } else {
+
+    empty.style.display = "none";
+  }
+
+  // RENDER TASKS
+  filteredTasks.forEach((task,index)=>{
+
+    const li =
+      document.createElement("li");
+
+    li.className = "task-item";
+
+    li.innerHTML = `
+
+      <div class="task-left">
+
+        <div class="task-name">
+
+          ${task.done ? "✅" : "📌"}
+
+          ${task.text}
+
+        </div>
+
+        <div class="task-meta">
+
+          📂 ${task.category}
+
+          &nbsp;&nbsp;
+
+          📅 ${task.dueDate}
+
+        </div>
+
+        <div class="priority ${task.priority.toLowerCase()}">
+
+          ${task.priority}
+
+        </div>
+
+      </div>
+
+      <div class="task-actions">
+
+        <button onclick="toggleTask(${index})">
+
+          ${task.done ? "Undo" : "Done"}
+
+        </button>
+
+        <button onclick="deleteTask(${index})">
+
+          Delete
+
+        </button>
+
+      </div>
+    `;
+
+    list.appendChild(li);
+  });
+}
+
+function searchTasks(){
+
+  const value =
+    document
+    .getElementById("searchTask")
+    .value
+    .toLowerCase();
+
+  const filtered =
+    tasks.filter(task =>
+
+      task.text
+      .toLowerCase()
+      .includes(value)
+    );
+
+  renderTasks(filtered);
+}
+
+function updateStats(){
+
   const total = tasks.length;
-  const done = tasks.filter(t => t.done).length;
 
-  const totalEl = document.getElementById("totalTasks");
-  const doneEl = document.getElementById("completedTasks");
+  const done =
+    tasks.filter(t=>t.done).length;
 
-  if (totalEl) totalEl.innerText = total;
-  if (doneEl) doneEl.innerText = done;
+  const pending =
+    total - done;
+
+  const percent =
+    total === 0
+      ? 0
+      : Math.round((done/total)*100);
+
+  document.getElementById(
+    "totalTasks"
+  ).innerText = total;
+
+  document.getElementById(
+    "doneTasks"
+  ).innerText = done;
+
+  document.getElementById(
+    "pendingTasks"
+  ).innerText = pending;
+
+  document.getElementById(
+    "progressText"
+  ).innerText =
+    percent + "% Completed";
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    percent + "%";
 }
+
+renderTasks();
+
+
 
 // ===== TIMER SYSTEM =====
 
@@ -113,8 +374,9 @@ function startTimer() {
       // ===== BREAK FINISHED =====
       if (isBreak) {
 
-        alert("Break finished ☕");
-
+        showNotification(
+  "Break Finished ☕"
+);
         isBreak = false;
 
         time = focusTimeLeft;
@@ -141,7 +403,9 @@ function startTimer() {
         s.innerText = sessions;
       }
 
-      alert("Focus session complete 🎉");
+      showNotification(
+  "Focus Session Complete 🎉"
+);
     }
 
   }, 1000);
@@ -235,34 +499,49 @@ function addBreakToList() {
   breakList.appendChild(li);
 }
 
-// ===== INITIAL LOAD =====
+// =========================================
+// INITIAL LOAD
+// =========================================
+
 window.onload = () => {
 
+  // TASKS
+  renderTasks();
+
+  // TIMER
+  updateDisplay();
+
+  // HOME PAGE STATS
+  updateHomeStats();
+
+  // notifications
+  randomQuote();
+
+  // SESSIONS
   const s =
     document.getElementById("sessions");
 
-  if (s) {
+  if(s){
 
     s.innerText = sessions;
   }
 
-  updateDisplay();
-};
+  // THEME BUTTON
+  const btn =
+    document.getElementById("themeToggle");
 
+  if(btn){
 
-// ===== THEME =====
-window.onload = () => {
-  renderTasks();
-  updateDisplay();
-  updateHomeStats();
-
-  const btn = document.getElementById("themeToggle");
-  if (btn) {
     btn.onclick = () => {
+
       document.body.classList.toggle("dark");
     };
   }
-};
+
+  
+}; 
+
+
 
 function updateHomeStats() {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -275,4 +554,246 @@ function updateHomeStats() {
 
   if (totalEl) totalEl.innerText = total;
   if (completedEl) completedEl.innerText = completed;
+}
+
+
+// =========================================
+// DEMO POPUP
+// =========================================
+
+function openDemoPopup(){
+
+  document
+    .getElementById("demoPopup")
+    .style.display = "flex";
+}
+
+function closeDemoPopup(){
+
+  document
+    .getElementById("demoPopup")
+    .style.display = "none";
+}
+
+function submitDemo(){
+
+  const name =
+    document
+    .getElementById("demoName")
+    .value;
+
+  const email =
+    document
+    .getElementById("demoEmail")
+    .value;
+
+  if(!name || !email){
+
+    alert("Please fill all fields");
+
+    return;
+  }
+
+  showNotification(
+  "Demo Booked Successfully 🚀"
+);
+
+  closeDemoPopup();
+}
+
+
+// FIRST RENDER
+renderTasks();
+
+
+// logout button
+function logout(){
+
+  localStorage.removeItem("loggedIn");
+
+  alert("Logged out successfully");
+
+  window.location.href = "login.html";
+}
+
+// live clock
+function updateClock(){
+
+  const now = new Date();
+
+  const clock =
+    document.getElementById("liveClock");
+
+  if(clock){
+
+    clock.innerText =
+      now.toLocaleTimeString();
+  }
+}
+
+setInterval(updateClock,1000);
+
+
+
+
+const quotes = [
+
+  "Success starts with focus 🚀",
+
+  "Small progress is still progress ✨",
+
+  "Consistency beats motivation 💪",
+
+  "Stay focused and never quit 🔥"
+];
+function randomQuote(){
+
+  const quoteEl =
+    document.getElementById("quoteText");
+
+  if(quoteEl){
+
+    const random =
+      Math.floor(Math.random()*quotes.length);
+
+    quoteEl.innerText = quotes[random];
+  }
+}
+
+// =========================================
+// NOTIFICATION SYSTEM
+// =========================================
+
+function showNotification(message){
+
+  // CREATE DIV
+  const note =
+    document.createElement("div");
+
+  // MESSAGE
+  note.innerText = message;
+
+  // STYLE
+  note.style.position = "fixed";
+
+  note.style.top = "25px";
+
+  note.style.right = "25px";
+
+  note.style.padding = "16px 28px";
+
+  note.style.background =
+    "linear-gradient(135deg,#8b5cf6,#3b82f6)";
+
+  note.style.color = "white";
+
+  note.style.borderRadius = "16px";
+
+  note.style.fontWeight = "bold";
+
+  note.style.fontSize = "16px";
+
+  note.style.boxShadow =
+    "0 10px 30px rgba(0,0,0,0.25)";
+
+  note.style.zIndex = "999999";
+
+  note.style.opacity = "0";
+
+  note.style.transform =
+    "translateY(-20px)";
+
+  note.style.transition =
+    "all 0.4s ease";
+
+  // ADD TO BODY
+  document.body.appendChild(note);
+
+  // SHOW ANIMATION
+  setTimeout(()=>{
+
+    note.style.opacity = "1";
+
+    note.style.transform =
+      "translateY(0)";
+
+  },100);
+
+  // REMOVE AFTER 3 SEC
+  setTimeout(()=>{
+
+    note.style.opacity = "0";
+
+    note.style.transform =
+      "translateY(-20px)";
+
+    setTimeout(()=>{
+
+      note.remove();
+
+    },400);
+
+  },3000);
+}
+
+// EXPORT DATA in timer  page
+function exportData() {
+  const data = JSON.stringify(localStorage);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "focusflow-data.json";
+  a.click();
+}
+
+/* =========================================
+   ABOUT PAGE BUTTONS
+========================================= */
+
+// GET STARTED BUTTON
+
+const getStartedBtn =
+document.getElementById("getStartedBtn");
+
+if(getStartedBtn){
+
+  getStartedBtn.addEventListener("click", () => {
+
+    // OPEN TASK PAGE
+
+    window.location.href = "tasks.html";
+
+  });
+
+}
+
+
+// LEARN MORE BUTTON
+
+const learnMoreBtn =
+document.getElementById("learnMoreBtn");
+
+if(learnMoreBtn){
+
+  learnMoreBtn.addEventListener("click", () => {
+
+    // SCROLL TO FEATURES SECTION
+
+    const featuresSection =
+    document.querySelector(".features-section");
+
+    if(featuresSection){
+
+      featuresSection.scrollIntoView({
+
+        behavior: "smooth"
+
+      });
+
+    }
+
+  });
+
 }

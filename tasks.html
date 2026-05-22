@@ -1,98 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tasks</title>
-    <link rel="stylesheet" href="style3.css">
-</head>
-<body>
-    <header class="header">
-  <div class="logo">
-    <div class="logo-box"></div> 
-    <div>FocusFlow</div>
-</div>
 
-  <nav class="nav" id="navMenu">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>FocusFlow Tasks</title>
+
+  <link rel="stylesheet" href="style3.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="logo">
+
+    <div class="logo-box"></div>
+
+    <div>FocusFlow</div>
+
+  </div>
+
+  <nav class="nav">
+
     <a href="index.html">Home</a>
     <a href="tasks.html">Tasks</a>
     <a href="timer.html">Timer</a>
     <a href="stats.html">Stats</a>
-    <a href="settings.html">Settings</a>
+    <a href="about.html">About</a>
+
   </nav>
+
   <div class="right">
-    <a href="login.html" class="login">Login</a>
-    <button class="signup"
-    onclick="window.location.href='signup.html'">
-    Sign up
-</button>
+
+    <a href="login.html" class="login">
+      Login
+    </a>
+
+    <button
+      class="signup"
+      onclick="window.location.href='signup.html'">
+
+      Sign up
+
+    </button>
+
   </div>
 
-  <div class="actions">
-    <button id="themeToggle">🌙</button>
-    <div class="menu-toggle" id="menuToggle">☰</div>
-  </div>
 </header>
+
 <main class="container">
 
-  <section class="card">
-    <h2>Tasks</h2>
+  <!-- TASK CARD -->
+
+  <section class="card task-card">
 
     
-<!-- Task input section -->
+
+    <!-- INPUTS -->
+
     <div class="task-input">
-  <input id="taskInput" placeholder="Enter task...">
 
-  <select id="category">
-    <option>Work</option>
-    <option>Personal</option>
-    <option>Study</option>
-  </select>
+      <input
+        id="taskInput"
+        placeholder="Enter your task..."
+      >
 
-  <input type="date" id="dueDate">
+      <select id="category">
 
-  <button onclick="addTask()">Add</button>
-</div>
+        <option>Work</option>
+        <option>Study</option>
+        <option>Personal</option>
 
-<!-- Filters -->
-<div class="filters">
-  <button onclick="filterTasks('all')">All</button>
-  <button onclick="filterTasks('done')">Completed</button>
-  <button onclick="filterTasks('pending')">Pending</button>
-</div>
+      </select>
 
-    <!-- Progress -->
-    <div class="progress">
-      <p id="progressText">0% Completed</p>
-      <div class="progress-bar">
-        <div id="progressFill"></div>
-      </div>
+      <input type="date" id="dueDate">
+
+      <select id="priority">
+
+        <option>High</option>
+        <option>Medium</option>
+        <option>Low</option>
+
+      </select>
+
+      <button onclick="addTask()">
+        Add
+      </button>
+
     </div>
 
-    <!-- Task List -->
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+  <button onclick="filterTasks('all')">
+    All
+  </button>
+
+  <button onclick="filterTasks('done')">
+    Completed
+  </button>
+
+  <button onclick="filterTasks('pending')">
+    Pending
+  </button>
+
+</div>
+
+
+
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+
+  <span class="search-icon">
+    🔍
+  </span>
+
+  <input
+    type="text"
+    id="searchTask"
+    class="search-box"
+    placeholder="Search your tasks..."
+    onkeyup="searchTasks()"
+  >
+
+</div>
+    
+
+    <!-- PROGRESS -->
+
+    <div class="progress-section">
+
+      <h2 id="progressText">
+        0% Completed
+      </h2>
+
+      <div class="progress-bar">
+
+        <div id="progressFill"></div>
+
+      </div>
+
+    </div>
+
+    <!-- TASK LIST -->
+
     <ul id="taskList"></ul>
 
-    <!-- Empty Message -->
-    <p id="emptyMsg">No tasks yet 🚀</p>
+    <p id="emptyMsg">
+
+      🚀 No tasks yet
+
+    </p>
 
   </section>
 
+  <!-- EXTRA SECTION -->
+
+  <section class="extra-grid">
+
+    <div class="extra-card">
+
+      <h3>📊 Today's Summary</h3>
+
+      <p>Total Tasks:
+        <span id="totalTasks">0</span>
+      </p>
+
+      <p>Completed:
+        <span id="doneTasks">0</span>
+      </p>
+
+      <p>Pending:
+        <span id="pendingTasks">0</span>
+      </p>
+
+    </div>
+
+    <div class="extra-card">
+
+      <h3>⚡ Productivity Tip</h3>
+
+      <p id="tipText">
+
+        Focus on one important task at a time.
+
+      </p>
+
+    </div>
+
+    <div class="extra-card">
+
+      <h3>🔥 Motivation</h3>
+
+      <p>
+
+        Small daily progress leads to big success.
+
+      </p>
+
+    </div>
+
+  </section>
+  
+
+
+  <br><br>
+  <div class="task-hero">
+
+  <div class="hero-left">
+
+    <div class="hero-badge">
+
+      🚀 Productivity Workspace
+
+    </div>
+
+    <h1 class="hero-title">
+
+      Organize Your Daily Goals
+
+    </h1>
+
+    <p class="hero-text">
+
+      Manage tasks, track progress,
+      and stay productive with FocusFlow.
+
+    </p>
+
+  </div>
+
+  <div class="hero-right">
+
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+      class="hero-image"
+    >
+
+  </div>
+
+</div>
+
+
 </main>
-<section class="extra">
 
-  <div class="extra-card">
-    <h3>📊 Today’s Summary</h3>
-    <p>Total Tasks: <span id="totalTasks">0</span></p>
-    <p>Completed: <span id="doneTasks">0</span></p>
-    <p>Pending: <span id="pendingTasks">0</span></p>
-  </div>
-
-  <div class="extra-card">
-    <h3>⚡ Productivity Tip</h3>
-    <p id="tipText">Stay focused and complete one task at a time.</p>
-  </div>
-
-</section>
 <script src="script3.js"></script>
+
 </body>
+
 </html>

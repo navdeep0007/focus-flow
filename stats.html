@@ -19,7 +19,7 @@
     <a href="tasks.html">Tasks</a>
     <a href="timer.html">Timer</a>
     <a href="stats.html">Stats</a>
-    <a href="settings.html">Settings</a>
+    <a href="about.html">About</a>
   </nav>
   <div class="right">
     <a href="login.html" class="login">Login</a>
@@ -31,25 +31,85 @@
 
   <div class="actions">
     <button id="themeToggle">🌙</button>
-    <div class="menu-toggle" id="menuToggle">☰</div>
+    <div class="menu-toggle" id="menuToggle"></div>
   </div>
 </header>
 <main class="container">
-  <div class="stats-top">
+  <section class="analytics-grid">
 
-  <!-- Chart -->
-  <div class="chart-box">
-    <h3>Weekly Activity</h3>
+  <!-- WEEKLY CHART -->
+
+  <div class="analytics-card">
+
+    <h2>
+
+      📈 Weekly Activity
+
+    </h2>
+
     <div class="chart">
-      <div class="bar" style="height: 40%">Mon</div>
-      <div class="bar" style="height: 60%">Tue</div>
-      <div class="bar" style="height: 30%">Wed</div>
-      <div class="bar" style="height: 80%">Thu</div>
-      <div class="bar" style="height: 50%">Fri</div>
-      <div class="bar" style="height: 20%">Sat</div>
-      <div class="bar" style="height: 10%">Sun</div>
+
+      <div class="bar" style="height:40%">
+        <span>Mon</span>
+      </div>
+
+      <div class="bar" style="height:65%">
+        <span>Tue</span>
+      </div>
+
+      <div class="bar" style="height:35%">
+        <span>Wed</span>
+      </div>
+
+      <div class="bar" style="height:90%">
+        <span>Thu</span>
+      </div>
+
+      <div class="bar" style="height:60%">
+        <span>Fri</span>
+      </div>
+
+      <div class="bar" style="height:30%">
+        <span>Sat</span>
+      </div>
+
+      <div class="bar" style="height:20%">
+        <span>Sun</span>
+      </div>
+
     </div>
+
   </div>
+
+  <!-- INSIGHTS -->
+
+  <div class="analytics-card insights-card">
+
+    <h2>
+
+      🔥 Smart Insights
+
+    </h2>
+
+    <div class="insight-item">
+      🔥 Best Day: Thursday
+    </div>
+
+    <div class="insight-item">
+      📈 Productivity: High
+    </div>
+
+    <div class="insight-item">
+      ⏳ Avg Focus: 2 hrs/day
+    </div>
+
+    <div class="insight-item">
+      🎯 Keep it up!
+    </div>
+
+  </div>
+
+</section>
 
   <!-- Insights -->
   <div class="insights-box">
@@ -61,25 +121,57 @@
   </div>
 
 </div>
-  <div class="card">
+ <section class="stats-cards">
+
+  <div class="premium-card">
+
+    <div class="card-icon">
+      📋
+    </div>
+
     <h3>Total Tasks</h3>
-    <p id="totalTasks">0</p>
+
+    <h1 id="totalTasks">0</h1>
+
   </div>
 
-  <div class="card">
+  <div class="premium-card">
+
+    <div class="card-icon">
+      ✅
+    </div>
+
     <h3>Completed</h3>
-    <p id="doneTasks">0</p>
+
+    <h1 id="doneTasks">0</h1>
+
   </div>
 
-  <div class="card">
+  <div class="premium-card">
+
+    <div class="card-icon">
+      ⏳
+    </div>
+
     <h3>Pending</h3>
-    <p id="pendingTasks">0</p>
+
+    <h1 id="pendingTasks">0</h1>
+
   </div>
 
-  <div class="card">
+  <div class="premium-card">
+
+    <div class="card-icon">
+      🔥
+    </div>
+
     <h3>Focus Sessions</h3>
-    <p id="focusSessions">0</p>
+
+    <h1 id="focusSessions">0</h1>
+
   </div>
+
+</section> 
 
 </div>
 
@@ -97,6 +189,54 @@
   <h3>Today's Summary</h3>
   <p>💡 Stay consistent and finish your goals!</p>
 </div>
+<br><br>
+
+<!-- Data -->
+  <div class="settings-card">
+    <h3>💾 Data</h3>
+    <button onclick="exportData()">Export Data</button>
+    <button onclick="clearData()">Reset All</button>
+  </div>
+  <br><br>
+
+<!-- HERO SECTION -->
+
+<section class="stats-hero">
+
+  <div class="stats-left">
+
+    <div class="stats-badge">
+
+      📊 Productivity Analytics
+
+    </div>
+
+    <h1 class="stats-title">
+
+      Track Your Daily Progress
+
+    </h1>
+
+    <p class="stats-text">
+
+      Analyze tasks, focus sessions,
+      and productivity performance
+      with beautiful insights.
+
+    </p>
+
+  </div>
+
+  <div class="stats-right">
+
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/4149/4149686.png"
+      class="stats-image"
+    >
+
+  </div>
+
+</section>
 </main>
 <script src="script3.js"></script>
 <script src="stats.js"></script>
